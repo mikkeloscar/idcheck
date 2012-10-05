@@ -37,12 +37,10 @@ void check_input(struct idcheck_t *idcheck, char* input) {
             check_result(idcheck);
         } else {
             idcheck_add_chip_code(idcheck, input);
-            /* printf("idcheck: Add chip: %s\n", input); */
             check_result(idcheck);
         }
     } else {
         idcheck_add_magnet_code(idcheck, input);
-        /* printf("idcheck: Add magnet: %s\n", input); */
     }
 }
 
@@ -62,11 +60,14 @@ int main() {
         if (!strcmp(in,"quit\n")) {
             exit(0);
         }
+        
+        if (strlen(in)+1 >= ID_LENGTH) {
 
-        check_input(&idcheck, in);
+            check_input(&idcheck, in);
 
-        // flush stdin
-        while ((ch = getchar()) != '\n' && ch != EOF);
+            // flush stdin
+            while ((ch = getchar()) != '\n' && ch != EOF);
+        }
     }
     return EXIT_SUCCESS;
 }

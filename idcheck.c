@@ -64,8 +64,10 @@ void idcheck_add_chip_code(struct idcheck_t *idcheck, char* code) {
  * Check if magnet and chip codes matches and return 1 for true 0 for false.
  */
 int idcheck_check_codes(struct idcheck_t *idcheck) {
-    
-    return !strcmp(idcheck->magnet,idcheck->chip);
+    if (idcheck_chip_is_set(idcheck)) {    
+        return !strcmp(idcheck->magnet,idcheck->chip);
+    }
+    return 0;
 }
 
 /**
